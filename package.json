@@ -1,0 +1,48 @@
+{
+  "name": "ops",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader esm-module-alias/loader --no-warnings src/app.js",
+    "dev": "nodemon --loader esm-module-alias/loader --no-warnings src/app.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "commander": "^12.0.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "esm-module-alias": "^2.1.0",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "i18n": "^0.15.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.11",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  },
+  "aliases": {
+    "@root": ".",
+    "@models": "./src/models",
+    "@services": "./src/http/services",
+    "@controllers": "./src/http/controllers",
+    "@middlewares": "./src/http/middlewares",
+    "@requests": "./src/http/requests",
+    "@routes": "./src/routes",
+    "@utils": "./src/utils",
+    "@config": "./src/config"
+  }
+}

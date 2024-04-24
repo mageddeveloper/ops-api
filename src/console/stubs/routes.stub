@@ -1,0 +1,13 @@
+import express from 'express';
+import { list{{pluralModelName}}, create{{modelName}}, get{{modelName}}, update{{modelName}}, delete{{modelName}} } from '@controllers/{{modelName}}Controller.js';
+
+const router = express.Router();
+
+// Define routes for {{modelName}}
+router.get('/', list{{pluralModelName}});
+router.post('/', create{{modelName}});
+router.get('/:id', get{{modelName}});
+router.put('/:id', update{{modelName}});
+router.delete('/:id', delete{{modelName}});
+
+export default router;

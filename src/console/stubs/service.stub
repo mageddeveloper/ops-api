@@ -1,0 +1,72 @@
+import {{modelName}} from '@models/{{modelName}}.js';
+
+export const list = async (filters) => {
+    try {
+        // Construct query object to hold filter criteria
+        const query = {};
+
+        if (filters) {
+            // Implement logic to apply filters to the query
+        }
+
+        // Retrieve {{modelName}} from the database based on the filters
+        const {{modelName}}List = await {{modelName}}.find(query);
+
+        return {{modelName}}List;
+    } catch (error) {
+        // Handle errors
+        throw new Error('Failed to fetch {{modelName}} list');
+    }
+};
+
+export const create = async (data) => {
+    try {
+        // Create a new {{modelName}} instance with the provided data
+        const new{{modelName}} = new {{modelName}}(data);
+
+        // Save the new {{modelName}} instance to the database
+        await new{{modelName}}.save();
+
+        return new{{modelName}};
+    } catch (error) {
+        // Handle errors
+        throw new Error('Failed to create {{modelName}}');
+    }
+};
+
+export const getById = async (id) => {
+    try {
+        // Retrieve a {{modelName}} by its ID from the database
+        const {{modelNameLowerCase}} = await {{modelName}}.findById(id);
+
+        return {{modelNameLowerCase}};
+    } catch (error) {
+        // Handle errors
+        throw new Error('Failed to fetch {{modelName}} by ID');
+    }
+};
+
+export const updateById = async (id, newData) => {
+    try {
+        // Update the {{modelName}} with the provided ID using the new data
+        const updated{{modelName}} = await {{modelName}}.findByIdAndUpdate(id, newData, { new: true });
+
+        return updated{{modelName}};
+    } catch (error) {
+        // Handle errors
+        throw new Error('Failed to update {{modelName}}');
+    }
+};
+
+export const deleteById = async (id) => {
+    try {
+        // Delete the {{modelName}} with the provided ID from the database
+        await {{modelName}}.findByIdAndDelete(id);
+
+        // Return a success message or any desired response
+        return { message: '{{modelName}} deleted successfully' };
+    } catch (error) {
+        // Handle errors
+        throw new Error('Failed to delete {{modelName}}');
+    }
+};

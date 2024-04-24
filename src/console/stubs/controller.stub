@@ -1,0 +1,68 @@
+import {{modelName}} from '@models/{{modelName}}.js';
+import { list, create, getById, updateById, deleteById } from '@services/{{modelName}}Service.js';
+
+export const list{{pluralModelName}} = async (req, res) => {
+    try {
+        // Call the service function to retrieve {{pluralModelName}} with filters
+        const {{pluralModelName}} = await list(req.query);
+
+        // Return the list of {{pluralModelName}} in the response
+        res.status(200).json({{pluralModelName}});
+    } catch (error) {
+        // Handle errors
+        res.status(500).json({ message: 'Failed to fetch {{pluralModelName}}', error: error.message });
+    }
+};
+
+export const create{{modelName}} = async (req, res) => {
+    try {
+        // Create a new {{modelName}} instance
+        const {{modelNameLowerCase}} = new {{modelName}}(req.body);
+
+        // Call the service function to create the {{modelName}}
+        await create({{modelNameLowerCase}});
+
+        // Return the created {{modelName}} in the response
+        res.status(201).json({{modelNameLowerCase}});
+    } catch (error) {
+        // Handle errors
+        res.status(500).json({ message: 'Failed to create {{modelName}}', error: error.message });
+    }
+};
+
+export const get{{modelName}} = async (req, res) => {
+    const {{modelNameLowerCase}}Id = req.params.id;
+
+    try {
+        const {{modelNameLowerCase}} = await getById({{modelNameLowerCase}}Id);
+        if (!{{modelNameLowerCase}}) {
+            return res.status(404).json({ message: '{{modelName}} not found' });
+        }
+        res.json({{modelNameLowerCase}});
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch {{modelName}}', error: error.message });
+    }
+};
+
+export const update{{modelName}} = async (req, res) => {
+    const {{modelNameLowerCase}}Id = req.params.id;
+    const newData = req.body;
+
+    try {
+        const updated{{modelName}} = await updateById({{modelNameLowerCase}}Id, newData);
+        res.json(updated{{modelName}});
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to update {{modelName}}', error: error.message });
+    }
+};
+
+export const delete{{modelName}} = async (req, res) => {
+    const {{modelNameLowerCase}}Id = req.params.id;
+
+    try {
+        await deleteById({{modelNameLowerCase}}Id);
+        res.json({ message: '{{modelName}} deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to delete {{modelName}}', error: error.message });
+    }
+};
