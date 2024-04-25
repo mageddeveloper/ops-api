@@ -14,6 +14,7 @@ import profileRoutes from "@routes/Profile.js";
 import orderRoutes from "@routes/Order.js";
 import adminRoutes from "@routes/Admin.js";
 import errorHandler from "@middlewares/errorHandler.js";
+import confirmationRoutes from "@routes/ConfirmationFlow.js";
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use("/app", appRoutes);
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/order", orderRoutes);
+app.use("/confirmation", confirmationRoutes);
 
 // Admin routess
 app.use("/admin", adminRoutes);

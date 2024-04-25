@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import flowStepSchema from "./flowStep";
 
 const { Schema, model } = mongoose;
 
@@ -12,10 +11,22 @@ const confirmationFlowSchema = new Schema(
     description: {
       type: String,
     },
-    steps: [{
+    steps: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "FlowStep",
+      },
+    ],
+    appId: {
       type: Schema.Types.ObjectId,
-      ref: 'FlowStep'
-    }] 
+      ref: "App",
+      required: true,
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User", 
+      required: true,
+    },
   },
   {
     timestamps: true,
