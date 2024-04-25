@@ -24,10 +24,23 @@ export const listAppOrders = async (req, res) => {
 export const createOrder = async (req, res) => {
   try {
     // Extract necessary data from the request body
-    const { orderId, customer, orderDetails, orderTotal } =
-      req.body;
+    const { orderId, customer, orderDetails, orderTotal } = req.body;
 
     const appId = req.customApp._id;
+
+    // Check if an order with the same orderId and appId already exists
+    const existingOrder = await orderService.findByOrderIdAndAppId(
+      orderId,
+      appId
+    );
+
+    if (existingOrder) {
+      return res
+        .status(400)
+        .json({
+          message: "Order with the same order Id already exists for this application",
+        });
+    }
 
     // Call the createOrder service function
     const order = await orderService.create(

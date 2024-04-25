@@ -65,3 +65,20 @@ export const create = async (
     throw new Error("Failed to create order");
   }
 };
+
+export const findByOrderIdAndAppId = async (orderId, appId) => {
+  try {
+    // Query the database for an order with the given orderId and appId
+    const order = await Order.findOne({
+      orderId: orderId,
+      appId: appId,
+    });
+
+    return order;
+  } catch (error) {
+    // Handle errors
+    throw new Error(
+      "Failed to find order by orderId and appId: " + error.message
+    );
+  }
+};

@@ -15,3 +15,16 @@ Scalability: Design the platform to scale horizontally to handle increasing load
 Monitoring and Logging: Set up monitoring and logging systems to track platform performance, identify issues, and troubleshoot problems effectively.
 Documentation and Support: Provide comprehensive documentation and support resources for users and developers to facilitate integration and troubleshooting.
 
+
+--------
+Done:
+user create app
+generate api secret key live and dev
+api to create order using the secret key 
+api to list app orders 
+check if order already exist before submitting
+
+Working on:
+confirmation flow
+flow step
+message template
