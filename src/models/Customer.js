@@ -8,11 +8,12 @@ const customerSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false,
     unique: true
   },
   phoneNumber: {
-    type: String
+    type: String,
+    required: true,
   },
   appId: {
     type: Schema.Types.ObjectId,

@@ -11,6 +11,7 @@ import appRoutes from "@routes/App.js";
 import config from "@config/environment.js";
 import connectDB from "@config/database.js";
 import profileRoutes from "@routes/Profile.js";
+import orderRoutes from "@routes/Order.js";
 import adminRoutes from "@routes/Admin.js";
 import errorHandler from "@middlewares/errorHandler.js";
 
@@ -39,6 +40,7 @@ app.use("/users", userRoutes);
 app.use("/app", appRoutes);
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
+app.use("/order", orderRoutes);
 
 // Admin routess
 app.use('/admin', adminRoutes);

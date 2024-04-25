@@ -20,7 +20,11 @@ const orderSchema = new Schema(
       required: true,
     },
     orderDetails: {
-      type: String,
+      type: Schema.Types.Mixed, // Store as a JSON object
+      required: true,
+    },
+    orderTotal: {
+      type: Number,
       required: true,
     },
     confirmationStatus: {
