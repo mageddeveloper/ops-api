@@ -1,7 +1,7 @@
 import App from "@models/App.js";
 
 const verifyApiKey = async (req, res, next) => {
-  const apiKey = req.headers["x-api-key"];
+  const apiKey = req.headers.authkey;
   if (!apiKey) {
     return res
       .status(401)
@@ -9,7 +9,6 @@ const verifyApiKey = async (req, res, next) => {
   }
 
   try {
-
     // Find the app with the provided API key
     const app = await App.findOne({
       $or: [{ secretApiKeyDev: apiKey }, { secretApiKeyLive: apiKey }],
@@ -20,8 +19,7 @@ const verifyApiKey = async (req, res, next) => {
     }
 
     // Attach the app details to the request object
-    req.app = app;
-
+    req.customApp = app;
     next();
   } catch (error) {
     return res.status(403).json({ message: "Unauthorized: Invalid API key" });

@@ -1,11 +1,9 @@
-import App from "@models/App.js";
-
 import * as orderService from "@services/orderService.js";
 
 export const listAppOrders = async (req, res) => {
   try {
     // Get the user ID from the authenticated user
-    const appId = req.app._id;
+    const appId = req.body.appId;
 
     // Extract additional filters from the query parameters
     const filters = req.query;
@@ -26,14 +24,14 @@ export const listAppOrders = async (req, res) => {
 export const createOrder = async (req, res) => {
   try {
     // Extract necessary data from the request body
-    const { orderExternalId, customer, orderDetails, orderTotal } =
+    const { orderId, customer, orderDetails, orderTotal } =
       req.body;
 
-    const appId = req.app._id;
+    const appId = req.customApp._id;
 
     // Call the createOrder service function
     const order = await orderService.create(
-      orderExternalId,
+      orderId,
       customer,
       appId,
       orderDetails,

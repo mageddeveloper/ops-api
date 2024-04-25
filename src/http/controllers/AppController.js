@@ -1,6 +1,6 @@
 import App from "@models/App.js";
 
-import * as appService from "@services/AppService.js";
+import * as appService from "@services/appService.js";
 
 export const listUserApps = async (req, res) => {
   try {

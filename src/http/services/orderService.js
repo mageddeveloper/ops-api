@@ -24,7 +24,7 @@ export const list = async (appId, filters) => {
 };
 
 export const create = async (
-  orderExternalId,
+  orderId,
   customer,
   appId,
   orderDetails,
@@ -48,7 +48,7 @@ export const create = async (
 
     // Create a new order instance
     const order = new Order({
-      orderExternalId,
+      orderId,
       customerId: existingCustomer._id,
       appId,
       orderDetails,

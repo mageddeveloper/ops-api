@@ -5,7 +5,7 @@ const confirmationStatuses = ["pending", "confirmed", "rejected"];
 
 const orderSchema = new Schema(
   {
-    orderExternalId: {
+    orderId: {
       type: String,
       required: true,
     },
