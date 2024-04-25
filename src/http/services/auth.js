@@ -7,10 +7,6 @@ import config from '@config/environment.js';
 
 dotenv.config()
 
-// service.js
-import User from './models/User';
-import bcrypt from 'bcrypt';
-
 export const register = async (data) => {
   const existingUser = await User.findOne({ email: data.email });
   if (existingUser) {
@@ -19,7 +15,8 @@ export const register = async (data) => {
 
   const newUser = new User(data);
   await newUser.save();
-  return newUser;
+
+  return { message: "User created successfully" };
 };
 
 export const login = async (email, password) => {

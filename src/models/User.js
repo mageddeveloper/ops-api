@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
   {
-    _id: {
-      type: Schema.Types.ObjectId,
-      auto: true,
-    },
     username: {
       type: String,
       required: true,

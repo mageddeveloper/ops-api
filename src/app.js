@@ -7,6 +7,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import authRoutes from "@routes/Auth.js"
 import userRoutes from "@routes/User.js";
+import appRoutes from "@routes/App.js";
 import config from "@config/environment.js";
 import connectDB from "@config/database.js";
 import profileRoutes from "@routes/Profile.js";
@@ -35,6 +36,7 @@ app.use(cors());
 
 // Routes
 app.use("/users", userRoutes);
+app.use("/app", appRoutes);
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 
