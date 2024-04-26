@@ -20,7 +20,7 @@ const verifyToken = async (req, res, next) => {
     
     next();
   } catch (error) {
-    return res.status(403).json({ message: 'Unauthorized: Invalid token' });
+    return res.status(403).json({ message: 'Unauthorized: please login first' });
   }
 };
 

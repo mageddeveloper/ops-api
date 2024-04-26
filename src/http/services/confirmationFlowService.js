@@ -1,9 +1,9 @@
 import ConfirmationFlow from "@models/ConfirmationFlow.js";
 
-export const list = async (filters) => {
+export const list = async (appId, filters) => {
   try {
     // Construct query object to hold filter criteria
-    const query = {};
+    const query = { appId };
 
     if (filters) {
       // Implement logic to apply filters to the query

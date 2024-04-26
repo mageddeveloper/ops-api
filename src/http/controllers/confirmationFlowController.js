@@ -3,8 +3,14 @@ import * as confirmationFlowService from "@services/confirmationFlowService.js";
 
 export const listConfirmationFlows = async (req, res) => {
   try {
+    // Get the user ID from the authenticated user
+    const appId = req.body.appId;
+
+    // Extract additional filters from the query parameters
+    const filters = req.query;
+
     // Call the service function to retrieve ConfirmationFlows with filters
-    const ConfirmationFlows = await confirmationFlowService.list(req.query);
+    const ConfirmationFlows = await confirmationFlowService.list(appId, filters);
 
     // Return the list of ConfirmationFlows in the response
     res.status(200).json(ConfirmationFlows);
