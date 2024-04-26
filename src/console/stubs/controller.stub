@@ -1,10 +1,10 @@
 import {{modelName}} from '@models/{{modelName}}.js';
-import { list, create, getById, updateById, deleteById } from '@services/{{modelName}}Service.js';
+import * as {{modelName}}Service from '@services/{{modelName}}Service.js';
 
 export const list{{pluralModelName}} = async (req, res) => {
     try {
         // Call the service function to retrieve {{pluralModelName}} with filters
-        const {{pluralModelName}} = await list(req.query);
+        const {{pluralModelName}} = await {{modelName}}Service.list(req.query);
 
         // Return the list of {{pluralModelName}} in the response
         res.status(200).json({{pluralModelName}});
@@ -20,7 +20,7 @@ export const create{{modelName}} = async (req, res) => {
         const {{modelNameLowerCase}} = new {{modelName}}(req.body);
 
         // Call the service function to create the {{modelName}}
-        await create({{modelNameLowerCase}});
+        await {{modelName}}Service.create({{modelNameLowerCase}});
 
         // Return the created {{modelName}} in the response
         res.status(201).json({{modelNameLowerCase}});
@@ -34,7 +34,7 @@ export const get{{modelName}} = async (req, res) => {
     const {{modelNameLowerCase}}Id = req.params.id;
 
     try {
-        const {{modelNameLowerCase}} = await getById({{modelNameLowerCase}}Id);
+        const {{modelNameLowerCase}} = await {{modelName}}Service.getById({{modelNameLowerCase}}Id);
         if (!{{modelNameLowerCase}}) {
             return res.status(404).json({ message: '{{modelName}} not found' });
         }
@@ -49,7 +49,7 @@ export const update{{modelName}} = async (req, res) => {
     const newData = req.body;
 
     try {
-        const updated{{modelName}} = await updateById({{modelNameLowerCase}}Id, newData);
+        const updated{{modelName}} = await {{modelName}}Service.updateById({{modelNameLowerCase}}Id, newData);
         res.json(updated{{modelName}});
     } catch (error) {
         res.status(500).json({ message: 'Failed to update {{modelName}}', error: error.message });
@@ -60,7 +60,7 @@ export const delete{{modelName}} = async (req, res) => {
     const {{modelNameLowerCase}}Id = req.params.id;
 
     try {
-        await deleteById({{modelNameLowerCase}}Id);
+        await {{modelName}}Service.deleteById({{modelNameLowerCase}}Id);
         res.json({ message: '{{modelName}} deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Failed to delete {{modelName}}', error: error.message });

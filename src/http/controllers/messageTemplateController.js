@@ -16,14 +16,13 @@ export const listMessageTemplates = async (req, res) => {
 
 export const createMessageTemplate = async (req, res) => {
     try {
-        // Create a new MessageTemplate instance
-        const messagetemplate = new MessageTemplate(req.body);
+        const { channelType, content, placeholders, appId } = req.body;
 
         // Call the service function to create the MessageTemplate
-        await messageTemplateService.create(messagetemplate);
+        const messageTemplate = await messageTemplateService.create({ channelType, content, placeholders, appId });
 
         // Return the created MessageTemplate in the response
-        res.status(201).json(messagetemplate);
+        res.status(201).json(messageTemplate);
     } catch (error) {
         // Handle errors
         res.status(500).json({ message: 'Failed to create MessageTemplate', error: error.message });

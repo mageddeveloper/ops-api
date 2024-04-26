@@ -16,6 +16,11 @@ const messageTemplateSchema = new Schema(
       type: [String],
       default: [],
     },
+    appId: {
+      type: Schema.Types.ObjectId,
+      ref: "App",
+      required: true,
+    },
   },
   {
     timestamps: true,

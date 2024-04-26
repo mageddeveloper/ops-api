@@ -15,6 +15,7 @@ import orderRoutes from "@routes/Order.js";
 import adminRoutes from "@routes/Admin.js";
 import errorHandler from "@middlewares/errorHandler.js";
 import confirmationRoutes from "@routes/ConfirmationFlow.js";
+import messageTemplateRoutes from "@routes/messageTemplate.js";
 
 const app = express();
 
@@ -38,12 +39,13 @@ app.use(morgan("common"));
 app.use(cors());
 app.set("trust proxy", true);
 // Routes
-app.use("/users", userRoutes);
+app.use("/user", userRoutes);
 app.use("/app", appRoutes);
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/order", orderRoutes);
 app.use("/confirmation", confirmationRoutes);
+app.use("/message-template", messageTemplateRoutes);
 
 // Admin routess
 app.use("/admin", adminRoutes);

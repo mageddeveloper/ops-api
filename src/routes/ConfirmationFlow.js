@@ -8,7 +8,7 @@ import { confirmationflowRequest } from '@requests/confirmation/confirmationflow
 const router = express.Router();
 
 // Define routes for ConfirmationFlow
-router.post('/', verifyToken, validate(listRequest), confirmationFlow.listConfirmationFlows);
+router.post('/list', verifyToken, validate(listRequest), confirmationFlow.listConfirmationFlows);
 router.post('/', verifyToken, validate(confirmationflowRequest), confirmationFlow.createConfirmationFlow);
 router.get('/:id', verifyToken, confirmationFlow.getConfirmationFlow);
 router.put('/:id', verifyToken, confirmationFlow.updateConfirmationFlow);
