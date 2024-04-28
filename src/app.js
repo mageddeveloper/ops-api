@@ -15,6 +15,7 @@ import orderRoutes from "@routes/Order.js";
 import adminRoutes from "@routes/Admin.js";
 import errorHandler from "@middlewares/errorHandler.js";
 import confirmationRoutes from "@routes/ConfirmationFlow.js";
+import flowStepRoutes from "@routes/FlowStep.js";
 import messageTemplateRoutes from "@routes/messageTemplate.js";
 
 const app = express();
@@ -45,6 +46,7 @@ app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/order", orderRoutes);
 app.use("/confirmation", confirmationRoutes);
+app.use("/flow-step", flowStepRoutes);
 app.use("/message-template", messageTemplateRoutes);
 
 // Admin routess

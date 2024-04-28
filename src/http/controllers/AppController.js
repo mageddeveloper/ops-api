@@ -1,4 +1,5 @@
 import App from "@models/App.js";
+import ConfirmationFlow from "@models/ConfirmationFlow.js";
 
 import * as appService from "@services/appService.js";
 
@@ -25,7 +26,7 @@ export const listUserApps = async (req, res) => {
 
 export const createApp = async (req, res) => {
   try {
-    const app = await appService.create(req.body, req.user._id); 
+    const app = await appService.create(req.body, req.user._id);
 
     res.status(201).json(app);
   } catch (error) {
@@ -76,5 +77,39 @@ export const deleteApp = async (req, res) => {
     res
       .status(500)
       .json({ message: "Failed to delete App", error: error.message });
+  }
+};
+
+// Controller Implementation
+export const setConfirmationFlow = async (req, res) => {
+  try {
+    const { appId, confirmationFlowId } = req.body;
+
+    // Check if the provided app ID exists
+    const app = await App.findById(appId);
+    if (!app) {
+      return res.status(404).json({ message: "App not found" });
+    }
+
+    // Check if the provided confirmation flow ID exists
+    const confirmationFlow = await ConfirmationFlow.findById(
+      confirmationFlowId
+    );
+    if (!confirmationFlow) {
+      return res.status(404).json({ message: "Confirmation flow not found" });
+    }
+
+    // Update the activeConfirmationFlow field of the app
+    app.activeConfirmationFlow = confirmationFlowId;
+    await app.save();
+
+    return res
+      .status(200)
+      .json({ message: "Active confirmation flow set successfully" });
+  } catch (error) {
+    console.error("Error setting active confirmation flow:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to set active confirmation flow" });
   }
 };

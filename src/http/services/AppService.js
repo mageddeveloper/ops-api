@@ -49,7 +49,7 @@ export const create = async (data, userId) => {
 export const getById = async (id) => {
   try {
     // Retrieve a App by its ID from the database
-    const app = await App.findById(id);
+    const app = await App.findById(id).populate('activeConfirmationFlow');
 
     return app;
   } catch (error) {

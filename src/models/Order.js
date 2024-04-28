@@ -9,12 +9,12 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
-    customerId: {
+    customer: {
       type: Schema.Types.ObjectId,
       ref: "Customer",
       required: true,
     },
-    appId: {
+    app: {
       type: Schema.Types.ObjectId,
       ref: "App",
       required: true,

@@ -1,3 +1,4 @@
+import App from "@models/App.js";
 import Order from "@models/Order.js";
 import Customer from "@models/Customer.js";
 
@@ -31,6 +32,7 @@ export const create = async (
   orderTotal
 ) => {
   try {
+    let app = await App.findById(appId);
     // Check if the customer already exists based on email or phone number
     let existingCustomer = await Customer.findOne({
       $or: [{ email: customer.email }, { phoneNumber: customer.phoneNumber }],
@@ -49,8 +51,8 @@ export const create = async (
     // Create a new order instance
     const order = new Order({
       orderId,
-      customerId: existingCustomer._id,
-      appId,
+      customer: existingCustomer,
+      app,
       orderDetails,
       orderTotal,
     });

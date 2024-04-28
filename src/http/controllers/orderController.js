@@ -1,4 +1,6 @@
+import Order from "@models/Order.js";
 import * as orderService from "@services/orderService.js";
+import { executeConfirmationFlow } from "@controllers/confirmationFlowController.js";
 
 export const listAppOrders = async (req, res) => {
   try {
@@ -29,20 +31,15 @@ export const createOrder = async (req, res) => {
     const appId = req.customApp._id;
 
     // Check if an order with the same orderId and appId already exists
-    const existingOrder = await orderService.findByOrderIdAndAppId(
-      orderId,
-      appId
-    );
+    const existingOrder = await Order.findOne({ orderId, app: appId });
 
     if (existingOrder) {
-      return res
-        .status(400)
-        .json({
-          message: "Order with the same order Id already exists for this application",
-        });
+      return res.status(400).json({
+        message:
+          "Order with the same order Id already exists for this application",
+      });
     }
 
-    // Call the createOrder service function
     const order = await orderService.create(
       orderId,
       customer,
@@ -51,11 +48,15 @@ export const createOrder = async (req, res) => {
       orderTotal
     );
 
+    // Execute the confirmation flow for the created order
+    await executeConfirmationFlow(order._id);
+
     res.status(201).json(order);
   } catch (error) {
     // Handle errors
+    console.error("Failed to create order:", error);
     res
       .status(500)
-      .json({ message: "Failed to create App", error: error.message });
+      .json({ message: "Failed to create order", error: error.message });
   }
 };

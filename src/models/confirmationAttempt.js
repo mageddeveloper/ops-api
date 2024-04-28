@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
+import { communicationChannels } from '@config/channels.js';
+
 const activeChannels = Object.entries(communicationChannels)
   .filter(([channel, isActive]) => isActive)
   .map(([channel]) => channel);

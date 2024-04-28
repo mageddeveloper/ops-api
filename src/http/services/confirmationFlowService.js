@@ -37,7 +37,7 @@ export const create = async (data) => {
 export const getById = async (id) => {
   try {
     // Retrieve a ConfirmationFlow by its ID from the database
-    const confirmationflow = await ConfirmationFlow.findById(id);
+    const confirmationflow = await ConfirmationFlow.findById(id).populate('steps');
 
     return confirmationflow;
   } catch (error) {

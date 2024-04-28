@@ -24,6 +24,10 @@ const appSchema = new Schema(
     secretApiKeyLive: {
       type: String,
     },
+    activeConfirmationFlow: {
+      type: Schema.Types.ObjectId,
+      ref: "ConfirmationFlow",
+    },
   },
   {
     timestamps: true,
