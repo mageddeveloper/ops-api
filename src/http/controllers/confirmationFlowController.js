@@ -117,49 +117,50 @@ export const deleteConfirmationFlow = async (req, res) => {
 };
 
 // Function to execute confirmation flow steps
-export const executeConfirmationFlow = async (orderId) => {
-  try {
-    // Retrieve the order by its ID
-    const order = await Order.findById(orderId);
+// export const executeConfirmationFlow = async (orderId) => {
+//   try {
+//     // Retrieve the order by its ID
+//     const order = await Order.findById(orderId);
 
-    if (!order) {
-      throw new Error("Order not found");
-    }
+//     if (!order) {
+//       throw new Error("Order not found");
+//     }
 
-    // Retrieve the app ID from the order
-    const appId = order.app;
+//     // Retrieve the app ID from the order
+//     const appId = order.app;
 
-    // Retrieve the app
-    const app = await App.findById(appId);
+//     // Retrieve the app
+//     const app = await App.findById(appId);
 
-    if (!app) {
-      throw new Error("App not found");
-    }
+//     if (!app) {
+//       throw new Error("App not found");
+//     }
 
-    // Retrieve the active confirmation flow for the app
-    const activeConfirmationFlow = await ConfirmationFlow.findById(
-      app.activeConfirmationFlow
-    );
+//     // Retrieve the active confirmation flow for the app
+//     const activeConfirmationFlow = await ConfirmationFlow.findById(
+//       app.activeConfirmationFlow
+//     );
 
-    if (!activeConfirmationFlow) {
-      throw new Error("No active confirmation flow found for the app");
-    }
+//     if (!activeConfirmationFlow) {
+//       throw new Error("No active confirmation flow found for the app");
+//     }
 
-    // Retrieve flow steps for the active confirmation flow
-    const flowSteps = await FlowStep.find({
-      confirmationFlow: activeConfirmationFlow._id,
-    })
-      .sort({ order: 1 })
-      .populate("messageTemplate");
+//     // Retrieve flow steps for the active confirmation flow
+//     const flowSteps = await FlowStep.find({
+//       confirmationFlow: activeConfirmationFlow._id,
+//     })
+//       .sort({ order: 1 })
+//       .populate("messageTemplate");
 
-    // Execute flow steps sequentially
-    for (const step of flowSteps) {
-      await executeFlowService.executeStep(step, order);
-      await executeFlowService.sleep(step.interval * 1000);
-    }
+//     // Execute flow steps sequentially
+//     for (const step of flowSteps) {
+//       await executeFlowService.executeStep(step, order);
+//       await confirmationFlowQueue.add("executeStep", { step, orderId });
+//       await executeFlowService.sleep(step.interval * 1000);
+//     }
 
-    console.log("Confirmation flow executed successfully");
-  } catch (error) {
-    console.error("Error executing confirmation flow:", error.message);
-  }
-};
+//     console.log("Confirmation flow executed successfully");
+//   } catch (error) {
+//     console.error("Error executing confirmation flow:", error.message);
+//   }
+// };

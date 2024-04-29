@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import User from '@models/User.js'; // Assuming your user model imports correctly
-import bcrypt from 'bcrypt'; // Import bcrypt for password hashing
+import bcrypt from 'bcryptjs'; // Import bcrypt for password hashing
 import dotenv from 'dotenv';
 import { userSeeder } from './userSeeder.js';
 

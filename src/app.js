@@ -16,7 +16,7 @@ import adminRoutes from "@routes/Admin.js";
 import errorHandler from "@middlewares/errorHandler.js";
 import confirmationRoutes from "@routes/ConfirmationFlow.js";
 import flowStepRoutes from "@routes/FlowStep.js";
-import messageTemplateRoutes from "@routes/messageTemplate.js";
+import messageTemplateRoutes from "@routes/MessageTemplate.js";
 
 const app = express();
 

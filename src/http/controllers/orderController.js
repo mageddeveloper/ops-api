@@ -1,6 +1,9 @@
+import App from "@models/App.js";
 import Order from "@models/Order.js";
+import FlowStep from "@models/FlowStep.js";
+import ConfirmationFlow from "@models/ConfirmationFlow.js";
 import * as orderService from "@services/orderService.js";
-import { executeConfirmationFlow } from "@controllers/confirmationFlowController.js";
+import ConfirmationFlowStep from "@models/ConfirmationFlowStep.js";
 
 export const listAppOrders = async (req, res) => {
   try {
@@ -48,8 +51,37 @@ export const createOrder = async (req, res) => {
       orderTotal
     );
 
-    // Execute the confirmation flow for the created order
-    await executeConfirmationFlow(order._id);
+    // Retrieve the active confirmation flow for the app
+    const app = await App.findById(appId);
+    const activeConfirmationFlow = await ConfirmationFlow.findById(
+      app.activeConfirmationFlow
+    );
+
+    if (!activeConfirmationFlow) {
+      throw new Error("No active confirmation flow found for the app");
+    }
+
+    // Retrieve flow steps for the active confirmation flow
+    const flowSteps = await FlowStep.find({
+      confirmationFlow: activeConfirmationFlow._id,
+    }).sort({ order: 1 });
+
+    // Calculate execution dates for each step
+    let executionDate = new Date();
+    for (const step of flowSteps) {
+      executionDate = new Date(executionDate.getTime() + step.interval * 1000);
+
+      // Create a confirmation flow step document for the order
+      const confirmationFlowStep = new ConfirmationFlowStep({
+        order: order._id,
+        step: step._id,
+        executionDate,
+        status: "pending",
+      });
+
+      // Save the confirmation flow step document to the database
+      await confirmationFlowStep.save();
+    }
 
     res.status(201).json(order);
   } catch (error) {
