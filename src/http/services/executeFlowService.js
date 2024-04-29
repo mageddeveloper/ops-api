@@ -47,6 +47,7 @@ const sendSMS = async (step, order) => {
 // Main function to execute a step in the flow
 export const executeStep = async (step, order) => {
   try {
+    console.log("executing a step...");
     // Perform actions based on the type of the step (e.g., send a message)
     switch (step.channel) {
       case "email":

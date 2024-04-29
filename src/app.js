@@ -3,20 +3,22 @@ import i18n from "i18n";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import cron from "node-cron";
 import express from "express";
 import bodyParser from "body-parser";
+import appRoutes from "@routes/App.js";
 import authRoutes from "@routes/Auth.js";
 import userRoutes from "@routes/User.js";
-import appRoutes from "@routes/App.js";
+import orderRoutes from "@routes/Order.js";
+import adminRoutes from "@routes/Admin.js";
 import config from "@config/environment.js";
 import connectDB from "@config/database.js";
 import profileRoutes from "@routes/Profile.js";
-import orderRoutes from "@routes/Order.js";
-import adminRoutes from "@routes/Admin.js";
+import flowStepRoutes from "@routes/FlowStep.js";
 import errorHandler from "@middlewares/errorHandler.js";
 import confirmationRoutes from "@routes/ConfirmationFlow.js";
-import flowStepRoutes from "@routes/FlowStep.js";
 import messageTemplateRoutes from "@routes/MessageTemplate.js";
+import { cronJob } from "./cronJob.js";
 
 const app = express();
 
@@ -61,3 +63,8 @@ connectDB()
     app.listen(config.port, () => console.log(`Server Port: ${config.port}`));
   })
   .catch((error) => console.log(error));
+
+// Schedule the cron job to run every minute
+cron.schedule("*/5 * * * * *", cronJob);
+
+console.log("Cron job scheduled to run every minute.");
