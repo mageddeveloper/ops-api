@@ -19,7 +19,7 @@ import errorHandler from "@middlewares/errorHandler.js";
 import confirmationRoutes from "@routes/ConfirmationFlow.js";
 import messageTemplateRoutes from "@routes/MessageTemplate.js";
 import { cronJob } from "./cronJob.js";
-
+import twilio from "twilio";
 const app = express();
 
 // Set up i18n configuration
@@ -65,6 +65,6 @@ connectDB()
   .catch((error) => console.log(error));
 
 // Schedule the cron job to run every minute
-cron.schedule("*/5 * * * * *", cronJob);
+// cron.schedule("*/5 * * * * *", cronJob);
 
-console.log("Cron job scheduled to run every minute.");
+// console.log("Cron job scheduled to run every minute.");

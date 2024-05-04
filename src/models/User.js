@@ -30,6 +30,18 @@ const userSchema = new Schema(
         ref: "App",
       },
     ],
+    photo: {
+      type: String,
+      required: false,
+    },
+    locale: {
+      type: String,
+      default: "en",
+    },
+    timezone: {
+      type: String,
+      default: "Asia/Riyadh", // Saudi Arabia time zone
+    },
   },
   {
     timestamps: true,

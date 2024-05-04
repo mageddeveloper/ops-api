@@ -1,5 +1,5 @@
 export const communicationChannels = {
   email: true,
-  whatsapp: false,
+  whatsapp: true,
   sms: false,
 };
