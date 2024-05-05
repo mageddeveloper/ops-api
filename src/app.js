@@ -20,7 +20,11 @@ import confirmationRoutes from "@routes/ConfirmationFlow.js";
 import messageTemplateRoutes from "@routes/MessageTemplate.js";
 import { cronJob } from "./cronJob.js";
 import twilio from "twilio";
+
 const app = express();
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Set up i18n configuration
 // i18n.configure({

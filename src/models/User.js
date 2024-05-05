@@ -42,6 +42,12 @@ const userSchema = new Schema(
       type: String,
       default: "Asia/Riyadh", // Saudi Arabia time zone
     },
+    currentApp: [
+      {
+        type: String,
+        required: false,
+      },
+    ],
   },
   {
     timestamps: true,

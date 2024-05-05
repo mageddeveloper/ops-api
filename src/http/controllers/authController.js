@@ -1,12 +1,14 @@
 import * as authService from '@services/auth.js';
+import { userResource } from '@resources/userResource.js';
 
 export const currentUser = async (req, res) => {
   try {
-    // Retrieve the current user from the request object (set by the authentication middleware)
     const currentUser = req.user;
 
+    const formattedUser = userResource(currentUser);
+
     // Return the current user in the response
-    res.status(200).json({user: currentUser});
+    res.status(200).json({user: formattedUser});
   } catch (error) {
     // Handle errors
     res.status(500).json({ error: 'Internal server error' });
@@ -64,16 +66,7 @@ export const resetPasswordHandler = async (req, res) => {
 // Controller function to handle user logout
 export const logoutUser = async (req, res) => {
   try {
-    // Perform logout action (e.g., clear user session or token)
-    // For example, if using token-based authentication with JWT, you may invalidate the token.
-    // You can also clear any user-related data stored in the session or cookies.
-
-    // For illustration purposes, let's assume we're invalidating the token
-    // (e.g., by removing it from the database of valid tokens, or marking it as expired)
-
-    // Here, you would perform any necessary logout actions (e.g., invalidate token, clear session data)
-    // After performing the logout action, send a response indicating successful logout
-
+    
     res.status(200).json({ message: 'Logout successful' });
   } catch (error) {
     // Handle errors

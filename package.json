@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@clerk/clerk-sdk-node": "^5.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "commander": "^12.0.0",
@@ -48,6 +47,7 @@
     "@routes": "./src/routes",
     "@utils": "./src/utils",
     "@config": "./src/config",
-    "@jobs": "./src/jobs"
+    "@jobs": "./src/jobs",
+    "@resources": "./src/models/resources"
   }
 }

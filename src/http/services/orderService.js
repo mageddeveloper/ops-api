@@ -2,10 +2,10 @@ import App from "@models/App.js";
 import Order from "@models/Order.js";
 import Customer from "@models/Customer.js";
 
-export const list = async (appId, filters) => {
+export const list = async (app, filters) => {
   try {
     // Construct query to find apps associated with the user ID
-    const query = { appId };
+    const query = { app };
 
     // Apply additional filters to the query
     if (filters) {

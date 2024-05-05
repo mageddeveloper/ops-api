@@ -7,7 +7,6 @@ dotenv.config()
 const verifyToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  console.log(req.headers)
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized: Please login first' });
   }
@@ -20,7 +19,7 @@ const verifyToken = async (req, res, next) => {
     
     next();
   } catch (error) {
-    return res.status(403).json({ message: 'Unauthorized: please login first' });
+    return res.status(401).json({ message: 'Unauthorized: please login first' });
   }
 };
 
